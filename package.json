@@ -1,0 +1,30 @@
+{
+  "name": "nafa-saas",
+  "version": "1.0.0",
+  "description": "NAFA SaaS - Logiciel de comptabilité en partie double selon le plan SYSCOHADA révisé pour TPE/PME",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "reset": "node src/reset-db.js",
+    "init-db": "node src/init-db.js",
+    "seed": "node src/seed-data.js",
+    "test": "node --test tests/accounting-engine.test.js tests/api.test.js"
+  },
+  "keywords": [
+    "comptabilite",
+    "syscohada",
+    "ohada",
+    "saas",
+    "express",
+    "sqlite"
+  ],
+  "author": "Antigravity Senior Engineer",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "better-sqlite3": "^11.8.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}

@@ -1,0 +1,2526 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NAFA SaaS | Comptabilité SYSCOHADA Révisé - TPE/PME</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='48' height='48' rx='12' fill='%230f766e'/%3E%3Cpath d='M13 35V13C13 11.9 13.9 11 15 11C16.1 11 17 11.9 17 13V35C17 36.1 16.1 37 15 37C13.9 37 13 36.1 13 35Z' fill='white'/%3E%3Cpath d='M31 35V13C31 11.9 31.9 11 33 11C34.1 11 35 11.9 35 13V35C35 36.1 34.1 37 33 37C31.9 37 31 36.1 31 35Z' fill='white'/%3E%3Cpath d='M15 13L33 35' stroke='%2334d399' stroke-width='4' stroke-linecap='round'/%3E%3Cellipse cx='24' cy='24' rx='6' ry='8' fill='%23f59e0b' transform='rotate(-15 24 24)'/%3E%3Cpath d='M23.5 19C24 22 24 26 23.5 29' stroke='%2378350f' stroke-width='1.5' stroke-linecap='round' transform='rotate(-15 24 24)'/%3E%3C/svg%3E">
+  
+  <style>
+    /* VARIABLES DE THÈME JOUR / NUIT */
+    :root {
+      --primary: #0f766e;
+      --primary-dark: #115e59;
+      --primary-light: #ccfbf1;
+      --primary-glow: rgba(15, 118, 110, 0.2);
+      --accent: #2563eb;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --card-hover: #f1f5f9;
+      --header-bg: rgba(255, 255, 255, 0.92);
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --border: #e2e8f0;
+      --border-subtle: #f1f5f9;
+      --input-bg: #ffffff;
+      --table-header: #f8fafc;
+      --table-row-hover: #f8fafc;
+      --table-foot: #f1f5f9;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
+      --success-border: #86efac;
+      --warning: #d97706;
+      --warning-bg: #fef3c7;
+      --warning-border: #fcd34d;
+      --danger: #dc2626;
+      --danger-bg: #fee2e2;
+      --danger-border: #fca5a5;
+      --info: #0284c7;
+      --info-bg: #e0f2fe;
+      --info-border: #bae6fd;
+      --radius: 14px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 12px 28px -4px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+      --flow-arrow: #0d9488;
+    }
+
+    [data-theme="dark"] {
+      --primary: #14b8a6;
+      --primary-dark: #0f766e;
+      --primary-light: rgba(20, 184, 166, 0.15);
+      --primary-glow: rgba(20, 184, 166, 0.3);
+      --accent: #3b82f6;
+      --bg: #0b1120;
+      --card-bg: #151e32;
+      --card-hover: #1c2742;
+      --header-bg: rgba(21, 30, 50, 0.9);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-light: #64748b;
+      --border: #22304d;
+      --border-subtle: #19243c;
+      --input-bg: #0f172a;
+      --table-header: #10182b;
+      --table-row-hover: #19243c;
+      --table-foot: #10182b;
+      --success: #22c55e;
+      --success-bg: rgba(34, 197, 94, 0.16);
+      --success-border: rgba(34, 197, 94, 0.35);
+      --warning: #f59e0b;
+      --warning-bg: rgba(245, 158, 11, 0.16);
+      --warning-border: rgba(245, 158, 11, 0.35);
+      --danger: #ef4444;
+      --danger-bg: rgba(239, 68, 68, 0.16);
+      --danger-border: rgba(239, 68, 68, 0.35);
+      --info: #38bdf8;
+      --info-bg: rgba(56, 189, 248, 0.16);
+      --info-border: rgba(56, 189, 248, 0.35);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 12px 30px -4px rgba(0, 0, 0, 0.5);
+      --flow-arrow: #2dd4bf;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.15s ease;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* EN-TÊTE GLASSO-MORPHISME */
+    header {
+      background: var(--header-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      filter: drop-shadow(0 2px 4px var(--primary-glow));
+    }
+
+    .brand-logo svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .brand-title h1 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-saas-badge {
+      background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border-radius: 6px;
+      box-shadow: 0 1px 2px rgba(15, 118, 110, 0.3);
+    }
+
+    .brand-title p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .company-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+
+    /* BOUTON TOGGLE MODE JOUR / NUIT */
+    .theme-toggle-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.45rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      background: var(--card-hover);
+      border-color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    /* BARRE DE NAVIGATION (ONGLETS) */
+    nav.nav-tabs {
+      max-width: 1240px;
+      margin: 1.25rem auto 0 auto;
+      width: 100%;
+      padding: 0 1.5rem;
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 0.85rem 1.35rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      position: relative;
+      border-bottom: 3px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      border-radius: 6px 6px 0 0;
+    }
+
+    .tab-btn:hover {
+      color: var(--primary);
+      background: var(--border-subtle);
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background: var(--card-bg);
+    }
+
+    main {
+      max-width: 1240px;
+      margin: 1.5rem auto;
+      padding: 0 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* CARTES KPI HAUT DE GAMME */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .kpi-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.35rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--kpi-color, var(--primary));
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    .kpi-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .kpi-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .kpi-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+    }
+
+    .kpi-value {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .kpi-sub {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* ZONE DE SIMULATEUR */
+    .simulator-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1.75rem;
+      position: relative;
+    }
+
+    .simulator-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .simulator-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .simulator-form {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .simulator-input {
+      flex: 1;
+      min-width: 280px;
+      padding: 0.85rem 1.15rem;
+      font-size: 1rem;
+      border: 2px solid var(--border);
+      background: var(--input-bg);
+      color: var(--text);
+      border-radius: var(--radius-sm);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .simulator-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: var(--card-hover);
+      border-color: var(--primary);
+    }
+
+    /* CHIPS DE SUGGESTION RAPIDE DU SIMULATEUR */
+    .quick-chips {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.85rem;
+    }
+
+    .quick-chips-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .chip-btn {
+      background: var(--border-subtle);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .chip-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* CARTE RÉSULTAT DE LA TRANSACTION (AVEC DIAGRAMME DE FLUX) */
+    .result-box {
+      margin-top: 1.35rem;
+      padding: 1.35rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .result-box.success {
+      display: block;
+      background: var(--success-bg);
+      border-color: var(--success-border);
+    }
+
+    .result-box.error {
+      display: block;
+      background: var(--danger-bg);
+      border-color: var(--danger-border);
+    }
+
+    /* VISUALISATEUR PARTIE DOUBLE (DEBIT -> CREDIT) */
+    .double-entry-flow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 1rem 0;
+      padding: 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      flex-wrap: wrap;
+    }
+
+    .flow-node {
+      flex: 1;
+      min-width: 180px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .flow-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    .flow-account {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .flow-arrow-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 0.5rem;
+    }
+
+    .flow-amount-pill {
+      background: var(--flow-arrow);
+      color: white;
+      font-size: 0.85rem;
+      font-weight: 800;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      box-shadow: var(--shadow-sm);
+      white-space: nowrap;
+    }
+
+    .flow-arrow-line {
+      width: 100%;
+      height: 2px;
+      background: var(--flow-arrow);
+      margin-top: 0.4rem;
+      position: relative;
+    }
+
+    .flow-arrow-line::after {
+      content: '▶';
+      position: absolute;
+      right: -6px;
+      top: -7px;
+      font-size: 10px;
+      color: var(--flow-arrow);
+    }
+
+    /* GAUGE DE CONFIANCE */
+    .confidence-meter {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.25rem;
+    }
+
+    .confidence-bar {
+      flex: 1;
+      height: 6px;
+      background: var(--border);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .confidence-fill {
+      height: 100%;
+      background: var(--success);
+      border-radius: 9999px;
+      transition: width 0.4s ease;
+    }
+
+    /* BADGES */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .badge-success { background: var(--success-bg); color: var(--success); border: 1px solid var(--success-border); }
+    .badge-warning { background: var(--warning-bg); color: var(--warning); border: 1px solid var(--warning-border); }
+    .badge-danger  { background: var(--danger-bg);  color: var(--danger);  border: 1px solid var(--danger-border); }
+    .badge-info    { background: var(--info-bg);    color: var(--info);    border: 1px solid var(--info-border); }
+
+    /* TABLEAUX STYLISÉS */
+    .table-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: var(--table-header);
+      padding: 0.85rem 1.15rem;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 0.95rem 1.15rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+      color: var(--text);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: var(--table-row-hover);
+    }
+
+    .num-col {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+    }
+
+    /* FILTRE & RECHERCHE DE TABLEAU */
+    .table-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 0.85rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      min-width: 220px;
+    }
+
+    .search-box:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* GRILLE MESSAGES TYPES */
+    .message-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1rem;
+    }
+
+    .msg-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1.15rem;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .msg-btn:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+      background: var(--card-hover);
+    }
+
+    .msg-btn-text {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .msg-btn-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* BANNIÈRE ÉQUILIBRE BALANCE */
+    .balance-banner {
+      padding: 1.15rem 1.5rem;
+      border-radius: var(--radius);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 700;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .balance-banner.balanced {
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid var(--success-border);
+    }
+
+    .balance-banner.unbalanced {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid var(--danger-border);
+    }
+
+    /* COMPTE DE RÉSULTAT HERO */
+    .income-hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .income-hero-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* PROGRESS BAR CHARGES VS PRODUITS */
+    .income-progress-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .income-bar-track {
+      height: 12px;
+      background: var(--border);
+      border-radius: 9999px;
+      overflow: hidden;
+      display: flex;
+      margin: 0.75rem 0;
+    }
+
+    .income-bar-fill {
+      height: 100%;
+      transition: width 0.4s ease;
+    }
+
+    /* PIED DE PAGE */
+    footer {
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .header-controls {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .tab-btn {
+        padding: 0.65rem 0.85rem;
+        font-size: 0.85rem;
+      }
+      .simulator-form {
+        flex-direction: column;
+      }
+      .btn {
+        width: 100%;
+      }
+      .double-entry-flow {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .flow-arrow-container {
+        margin: 0.5rem 0;
+      }
+      .flow-arrow-line {
+        display: none;
+      }
+    }
+
+    /* BANNIÈRE DE BIENVENUE & STATUT FISCAL DASHBOARD */
+    .company-banner {
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.08) 0%, rgba(37, 99, 235, 0.06) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .company-banner-content h2 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .company-banner-content p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .company-banner-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* JAUGE DE RÉPARTITION PRODUITS VS CHARGES */
+    .ratio-bar-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.75rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .ratio-bar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.65rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .ratio-bar-track {
+      height: 12px;
+      border-radius: 9999px;
+      background: var(--border);
+      overflow: hidden;
+      display: flex;
+      position: relative;
+    }
+
+    .ratio-segment-revenues {
+      background: #10b981;
+      height: 100%;
+      transition: width 0.4s ease;
+    }
+
+    .ratio-segment-expenses {
+      background: #ef4444;
+      height: 100%;
+      transition: width 0.4s ease;
+    }
+
+    /* ESPACE MON ENTREPRISE & FORMULAIRE */
+    .company-settings-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+    }
+
+    .form-section-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 0.65rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .form-group label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .form-control {
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.75rem 0.95rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    /* CARTES D'OPTIONS RÉGIME TVA */
+    .regime-options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .regime-card {
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      background: var(--card-bg);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .regime-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .regime-card.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+
+    .regime-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .regime-card-title {
+      font-size: 1rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .regime-card-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* BOÎTE STATS TVA */
+    .vat-summary-box {
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .vat-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    /* TOAST DE NOTIFICATION */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      pointer-events: none;
+    }
+
+    .toast {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      pointer-events: auto;
+      animation: slideInRight 0.3s ease;
+      max-width: 380px;
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- EN-TÊTE FIXE AVEC CONTROLES & THÈME -->
+  <header>
+    <div class="header-container">
+      <div class="brand" onclick="switchTab('dashboard')">
+        <div class="brand-logo" title="NAFA SaaS - Comptabilité SYSCOHADA">
+          <svg width="44" height="44" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="nafaBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0f766e"/>
+                <stop offset="100%" stop-color="#042f2e"/>
+              </linearGradient>
+              <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fde047"/>
+                <stop offset="50%" stop-color="#f59e0b"/>
+                <stop offset="100%" stop-color="#d97706"/>
+              </linearGradient>
+              <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#34d399"/>
+                <stop offset="100%" stop-color="#059669"/>
+              </linearGradient>
+              <filter id="nafaGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#000" flood-opacity="0.3"/>
+              </filter>
+            </defs>
+            <rect width="48" height="48" rx="12" fill="url(#nafaBg)"/>
+            <rect x="0.75" y="0.75" width="46.5" height="46.5" rx="11.25" stroke="#2dd4bf" stroke-opacity="0.3" stroke-width="1.5"/>
+            <!-- Piliers N Débit / Crédit -->
+            <path d="M11 35V13C11 11.9 11.9 11 13 11C14.1 11 15 11.9 15 13V35C15 36.1 14.1 37 13 37C11.9 37 11 36.1 11 35Z" fill="#ffffff" filter="url(#nafaGlow)"/>
+            <path d="M33 35V13C33 11.9 33.9 11 35 11C36.1 11 37 11.9 37 13V35C37 36.1 36.1 37 35 37C33.9 37 33 36.1 33 35Z" fill="#ffffff" filter="url(#nafaGlow)"/>
+            <!-- Flèche de croissance -->
+            <path d="M13.5 13L34.5 35" stroke="url(#emeraldGrad)" stroke-width="4.5" stroke-linecap="round"/>
+            <!-- Cauri d'Or central -->
+            <g transform="translate(24, 24)" filter="url(#nafaGlow)">
+              <ellipse cx="0" cy="0" rx="6.5" ry="8.5" fill="url(#goldGrad)" transform="rotate(-15)"/>
+              <path d="M-0.6 -5.5C-0.1 -2 -0.1 2 -0.6 5.5C0.8 5.5 1.3 2 1.1 -5.5Z" fill="#78350f" transform="rotate(-15)"/>
+              <circle cx="-2.2" cy="-2.5" r="0.7" fill="#fef3c7" transform="rotate(-15)"/>
+              <circle cx="-2.5" cy="0" r="0.7" fill="#fef3c7" transform="rotate(-15)"/>
+              <circle cx="-2.2" cy="2.5" r="0.7" fill="#fef3c7" transform="rotate(-15)"/>
+              <circle cx="2.2" cy="-2.5" r="0.7" fill="#fef3c7" transform="rotate(-15)"/>
+              <circle cx="2.5" cy="0" r="0.7" fill="#fef3c7" transform="rotate(-15)"/>
+              <circle cx="2.2" cy="2.5" r="0.7" fill="#fef3c7" transform="rotate(-15)"/>
+            </g>
+          </svg>
+        </div>
+        <div class="brand-title">
+          <h1>NAFA <span class="brand-saas-badge">SaaS</span></h1>
+          <p id="header-company-subtitle">Comptabilité SYSCOHADA Révisé • Boutique Dakar SARL</p>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <div class="company-pill" onclick="switchTab('company')" style="cursor:pointer;" title="Cliquez pour configurer l'entreprise et la TVA">
+          <div class="live-dot" title="Système opérationnel"></div>
+          <span id="header-company-country">🇸🇳 Sénégal</span>
+          <span>•</span>
+          <span id="header-company-currency">FCFA</span>
+          <span id="header-tva-badge" class="badge badge-info" style="font-size:0.7rem; padding:0.15rem 0.5rem; cursor:pointer;">Non-assujetti TVA</span>
+          <span id="auto-refresh-indicator" style="font-size: 0.75rem; color: var(--primary);" title="Cliquer pour actualiser" onclick="event.stopPropagation(); loadDashboard()">⏱ 30s</span>
+        </div>
+
+        <!-- TOGGLE MODE JOUR / NUIT -->
+        <button id="theme-toggle-btn" class="theme-toggle-btn" onclick="toggleTheme()" title="Basculer le mode Nuit / Jour">
+          <span id="theme-icon">🌙</span>
+          <span id="theme-label" style="font-size:0.8rem;">Mode Nuit</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ONGLETS DE NAVIGATION -->
+  <nav class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('dashboard')">📊 Tableau de bord</button>
+    <button class="tab-btn" onclick="switchTab('messages')">💬 Messages rapides</button>
+    <button class="tab-btn" onclick="switchTab('entries')">📑 Écritures</button>
+    <button class="tab-btn" onclick="switchTab('reports')">📈 Rapports financiers</button>
+    <button class="tab-btn" onclick="switchTab('company')">🏢 Mon Entreprise & TVA</button>
+  </nav>
+
+  <main>
+    <!-- ========================================== -->
+    <!-- ONGLET 1 : TABLEAU DE BORD AMÉLIORÉ       -->
+    <!-- ========================================== -->
+    <div id="tab-dashboard" class="tab-content active">
+      
+      <!-- Bannière d'Accueil & Régime Fiscal -->
+      <div class="company-banner">
+        <div class="company-banner-content">
+          <h2>
+            <span id="banner-company-name">Boutique Dakar SARL</span>
+            <span id="banner-tva-badge" class="badge badge-success" style="font-size:0.75rem;">Régime : Non-assujetti (Franchise)</span>
+          </h2>
+          <p id="banner-company-details">🇸🇳 Sénégal • Devise : FCFA • Dirigeant : Ibrahima Sow</p>
+        </div>
+        <div class="company-banner-actions">
+          <button class="btn btn-secondary" onclick="switchTab('company')" style="font-size:0.85rem; padding:0.5rem 1rem;">
+            ⚙️ Modifier Entreprise & TVA
+          </button>
+          <button class="btn btn-secondary" onclick="loadDashboard()" style="font-size:0.85rem; padding:0.5rem 0.85rem;" title="Actualiser le tableau de bord">
+            🔄 Actualiser
+          </button>
+        </div>
+      </div>
+
+      <!-- Grille de 8 KPIs Enrichis -->
+      <div class="kpi-grid">
+        <!-- 1. Caisse -->
+        <div class="kpi-card" style="--kpi-color: #0f766e;">
+          <div class="kpi-header">
+            <span class="kpi-title">Caisse Espèces (571)</span>
+            <div class="kpi-icon" style="background:var(--primary-light); color:var(--primary);">💵</div>
+          </div>
+          <div class="kpi-value" id="kpi-caisse">0 FCFA</div>
+          <div class="kpi-sub" id="kpi-caisse-sub">Liquidités en coffre</div>
+        </div>
+
+        <!-- 2. Banque & Wave -->
+        <div class="kpi-card" style="--kpi-color: #2563eb;">
+          <div class="kpi-header">
+            <span class="kpi-title">Banque & Mobile (521)</span>
+            <div class="kpi-icon" style="background:var(--info-bg); color:var(--info);">🏦</div>
+          </div>
+          <div class="kpi-value" id="kpi-banque">0 FCFA</div>
+          <div class="kpi-sub">Comptes bancaires, Wave & OM</div>
+        </div>
+
+        <!-- 3. Chiffre d'Affaires -->
+        <div class="kpi-card" style="--kpi-color: #10b981;">
+          <div class="kpi-header">
+            <span class="kpi-title">Chiffre d'Affaires</span>
+            <div class="kpi-icon" style="background:var(--success-bg); color:var(--success);">📈</div>
+          </div>
+          <div class="kpi-value" id="kpi-revenus">0 FCFA</div>
+          <div class="kpi-sub">Total ventes & services (Cl. 7)</div>
+        </div>
+
+        <!-- 4. Charges -->
+        <div class="kpi-card" style="--kpi-color: #dc2626;">
+          <div class="kpi-header">
+            <span class="kpi-title">Charges d'Exploitation</span>
+            <div class="kpi-icon" style="background:var(--danger-bg); color:var(--danger);">📉</div>
+          </div>
+          <div class="kpi-value" id="kpi-charges">0 FCFA</div>
+          <div class="kpi-sub">Achats, loyers, salaires (Cl. 6)</div>
+        </div>
+
+        <!-- 5. Résultat Net -->
+        <div class="kpi-card" style="--kpi-color: #f59e0b;">
+          <div class="kpi-header">
+            <span class="kpi-title">Résultat Net</span>
+            <div class="kpi-icon" id="kpi-resultat-icon" style="background:var(--warning-bg); color:var(--warning);">⚖️</div>
+          </div>
+          <div class="kpi-value" id="kpi-resultat">0 FCFA</div>
+          <div class="kpi-sub" id="kpi-resultat-sub">Produits - Charges</div>
+        </div>
+
+        <!-- 6. Immobilisations / Patrimoine -->
+        <div class="kpi-card" style="--kpi-color: #8b5cf6;">
+          <div class="kpi-header">
+            <span class="kpi-title">Immobilisations (Cl. 2)</span>
+            <div class="kpi-icon" style="background:rgba(139, 92, 246, 0.15); color:#8b5cf6;">🏛️</div>
+          </div>
+          <div class="kpi-value" id="kpi-immo">0 FCFA</div>
+          <div class="kpi-sub">Matériel, mobilier & informatique</div>
+        </div>
+
+        <!-- 7. Créances Clients -->
+        <div class="kpi-card" style="--kpi-color: #06b6d4;">
+          <div class="kpi-header">
+            <span class="kpi-title">Créances Clients (411)</span>
+            <div class="kpi-icon" style="background:rgba(6, 182, 212, 0.15); color:#06b6d4;">🤝</div>
+          </div>
+          <div class="kpi-value" id="kpi-clients">0 FCFA</div>
+          <div class="kpi-sub" id="kpi-dettes-sub">Dettes fournisseurs : 0 FCFA</div>
+        </div>
+
+        <!-- 8. Fiscalité & TVA -->
+        <div class="kpi-card" style="--kpi-color: #e11d48;" id="kpi-tva-card">
+          <div class="kpi-header">
+            <span class="kpi-title">Régime Fiscal TVA</span>
+            <div class="kpi-icon" style="background:rgba(225, 29, 72, 0.15); color:#e11d48;">🧾</div>
+          </div>
+          <div class="kpi-value" id="kpi-tva-status" style="font-size:1.15rem;">Franchise (0%)</div>
+          <div class="kpi-sub" id="kpi-tva-sub">Exonéré de déclaration TVA</div>
+        </div>
+      </div>
+
+      <!-- Jauge Visuelle de Répartition des Flux -->
+      <div class="ratio-bar-container">
+        <div class="ratio-bar-header">
+          <span>Structure du Résultat : <strong id="ratio-revenues-label">Produits (0%)</strong> vs <strong id="ratio-expenses-label">Charges (0%)</strong></span>
+          <span id="ratio-margin-badge" class="badge badge-info">Marge Nette : 0%</span>
+        </div>
+        <div class="ratio-bar-track">
+          <div id="ratio-bar-revenues" class="ratio-segment-revenues" style="width: 50%;"></div>
+          <div id="ratio-bar-expenses" class="ratio-segment-expenses" style="width: 50%;"></div>
+        </div>
+      </div>
+
+      <!-- Simulateur Intelligent de Langage Naturel -->
+      <div class="simulator-card">
+        <div class="simulator-title">
+          <span>⚡ Simulateur de saisie en langage naturel</span>
+          <span class="badge badge-success">Partie double déterministe</span>
+        </div>
+        <p class="simulator-desc">
+          Saisissez votre transaction en français courant tel qu'envoyé sur WhatsApp (ex: <em>« Vendu pagnes 45000 cash »</em>).
+          L'architecture <strong>« L'IA traduit, le code calcule »</strong> équilibre immédiatement vos comptes selon le plan SYSCOHADA révisé.
+        </p>
+
+        <form class="simulator-form" onsubmit="handleSendMessage(event)">
+          <input 
+            type="text" 
+            id="message-input" 
+            class="simulator-input" 
+            placeholder="Ex : Vendu pagnes 45000 cash, Achat ordinateur 250000, Frais Wave 1500, Apport capital 500k..." 
+            required 
+            autocomplete="off"
+          />
+          <button type="submit" class="btn" id="btn-submit">
+            <span>Enregistrer l'écriture</span>
+            <span>➔</span>
+          </button>
+        </form>
+
+        <!-- Chips d'exemples rapides cliquables -->
+        <div class="quick-chips">
+          <span class="quick-chips-label">Exemples rapides :</span>
+          <button type="button" class="chip-btn" onclick="fillSimulator('Vendu pagnes 45000 cash')">🛍️ Vente 45k</button>
+          <button type="button" class="chip-btn" onclick="fillSimulator('Acheté riz et huile au marché 80000')">🍚 Achat riz 80k</button>
+          <button type="button" class="chip-btn" onclick="fillSimulator('Achat ordinateur portable 250000 cash')">💻 Achat PC 250k</button>
+          <button type="button" class="chip-btn" onclick="fillSimulator('Achat moto livraison 650000 virement')">🛵 Moto 650k</button>
+          <button type="button" class="chip-btn" onclick="fillSimulator('Retrait banque pour alimenter caisse 100000')">🏦 Banque vers Caisse 100k</button>
+          <button type="button" class="chip-btn" onclick="fillSimulator('Frais de retrait wave 1500')">📲 Frais Wave 1500</button>
+          <button type="button" class="chip-btn" onclick="fillSimulator('Publicite facebook 15000')">📢 Pub Facebook 15k</button>
+          <button type="button" class="chip-btn" onclick="fillSimulator('Honoraires comptable 50000')">⚖️ Honoraires 50k</button>
+          <button type="button" class="chip-btn" onclick="fillSimulator('Apport de capital 500000 cash')">💼 Capital 500k</button>
+          <button type="button" class="chip-btn" onclick="fillSimulator('Patente annuelle 60000')">🧾 Patente 60k</button>
+        </div>
+
+        <!-- Boîte de Résultat avec Visualisation de Flux Comptable -->
+        <div id="result-box" class="result-box"></div>
+      </div>
+
+      <!-- Écritures Récentes du Journal -->
+      <div style="margin-top: 2rem;">
+        <div class="table-toolbar">
+          <div>
+            <h2 style="font-size: 1.15rem; font-weight: 800;">Dernières écritures comptables</h2>
+            <p style="color:var(--text-muted); font-size: 0.82rem;">Flux temps réel validé en partie double</p>
+          </div>
+          <button class="btn btn-secondary" style="font-size:0.85rem; padding:0.5rem 1rem;" onclick="switchTab('entries')">
+            Voir tout le journal ➔
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th class="num-col">Montant</th>
+                <th>Compte Débit (Emploi)</th>
+                <th>Compte Crédit (Ressource)</th>
+                <th>Confiance</th>
+              </tr>
+            </thead>
+            <tbody id="recent-entries-tbody">
+              <tr><td colspan="7" style="text-align:center; color:var(--text-muted);">Chargement des écritures...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ONGLET 2 : MESSAGES RAPIDES & JEUX DE TEST -->
+    <!-- ========================================== -->
+    <div id="tab-messages" class="tab-content">
+      <div class="table-toolbar">
+        <div>
+          <h2 style="font-size: 1.25rem; font-weight: 800;">Jeux de tests - Messages SYSCOHADA</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Cliquez sur un message type pour l'analyser et l'enregistrer directement en partie double.
+          </p>
+        </div>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <input type="text" id="filter-messages-input" class="search-box" placeholder="🔍 Filtrer les messages..." oninput="filterTestMessages()">
+        </div>
+      </div>
+
+      <div class="message-grid" id="test-messages-container"></div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ONGLET 3 : JOURNAL COMPLET DES ÉCRITURES   -->
+    <!-- ========================================== -->
+    <div id="tab-entries" class="tab-content">
+      <div class="table-toolbar">
+        <div>
+          <h2 style="font-size: 1.25rem; font-weight: 800;">Grand Livre & Journal des écritures</h2>
+          <p style="color: var(--text-muted); font-size: 0.85rem;" id="entries-count-text">Toutes les écritures enregistrées en partie double</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+          <input type="text" id="search-entries-input" class="search-box" placeholder="🔍 Rechercher (compte, libellé)..." oninput="filterEntriesTable()">
+          <button class="btn btn-secondary" onclick="loadEntries()">🔄 Actualiser</button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID / Date</th>
+              <th>Description / Libellé</th>
+              <th>Type</th>
+              <th class="num-col">Montant</th>
+              <th>Compte Débit</th>
+              <th>Compte Crédit</th>
+              <th>Confiance</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody id="all-entries-tbody">
+            <tr><td colspan="8" style="text-align:center; color:var(--text-muted);">Chargement...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ONGLET 4 : RAPPORTS & BILAN FINANCIER     -->
+    <!-- ========================================== -->
+    <div id="tab-reports" class="tab-content">
+      <!-- Balance générale -->
+      <div style="margin-bottom: 2.5rem;">
+        <div class="table-toolbar">
+          <div>
+            <h2 style="font-size: 1.25rem; font-weight: 800;">Balance Générale des Comptes</h2>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Plan comptable SYSCOHADA révisé (15 comptes du MVP)</p>
+          </div>
+          <button class="btn btn-secondary" onclick="loadReports()">🔄 Actualiser</button>
+        </div>
+
+        <div id="balance-status-banner" class="balance-banner balanced">
+          <span>⚖️ Statut : Balance Équilibrée</span>
+          <span id="balance-totals-badge">Total Débit = Total Crédit</span>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Intitulé du compte SYSCOHADA</th>
+                <th>Classe</th>
+                <th class="num-col">Total Débit</th>
+                <th class="num-col">Total Crédit</th>
+                <th class="num-col">Solde Débiteur</th>
+                <th class="num-col">Solde Créditeur</th>
+              </tr>
+            </thead>
+            <tbody id="trial-balance-tbody">
+              <tr><td colspan="7" style="text-align:center; color:var(--text-muted);">Chargement...</td></tr>
+            </tbody>
+            <tfoot id="trial-balance-tfoot" style="background:var(--table-foot); font-weight:800;"></tfoot>
+          </table>
+        </div>
+      </div>
+
+      <!-- Compte de résultat -->
+      <div>
+        <div class="table-toolbar">
+          <div>
+            <h2 style="font-size: 1.25rem; font-weight: 800;">Compte de Résultat Simplifié</h2>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Produits d'exploitation (Classe 7) vs Charges d'exploitation (Classe 6)</p>
+          </div>
+        </div>
+
+        <!-- Hero Résumé Compte de Résultat -->
+        <div class="income-hero">
+          <div class="income-hero-card" style="border-left: 4px solid var(--success);">
+            <div class="kpi-title">Total des Produits (Ventes)</div>
+            <div class="kpi-value" id="hero-revenues" style="color:var(--success);">0 FCFA</div>
+            <div class="kpi-sub">Comptes 701 & 706</div>
+          </div>
+          <div class="income-hero-card" style="border-left: 4px solid var(--danger);">
+            <div class="kpi-title">Total des Charges</div>
+            <div class="kpi-value" id="hero-expenses" style="color:var(--danger);">0 FCFA</div>
+            <div class="kpi-sub">Comptes 601, 604, 613, etc.</div>
+          </div>
+          <div class="income-hero-card" style="border-left: 4px solid var(--primary);">
+            <div class="kpi-title">Résultat Net d'Exploitation</div>
+            <div class="kpi-value" id="hero-net-profit">0 FCFA</div>
+            <div class="kpi-sub" id="hero-net-margin">Bénéfice net</div>
+          </div>
+        </div>
+
+        <!-- Détail Produits & Charges -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+          <!-- Produits (Classe 7) -->
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="2" style="background:var(--success-bg); color:var(--success); font-weight:800;">PRODUITS (Classe 7)</th>
+                </tr>
+              </thead>
+              <tbody id="income-revenues-tbody"></tbody>
+              <tfoot id="income-revenues-tfoot" style="background:var(--table-foot); font-weight:800;"></tfoot>
+            </table>
+          </div>
+
+          <!-- Charges (Classe 6) -->
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="2" style="background:var(--danger-bg); color:var(--danger); font-weight:800;">CHARGES (Classe 6)</th>
+                </tr>
+              </thead>
+              <tbody id="income-expenses-tbody"></tbody>
+              <tfoot id="income-expenses-tfoot" style="background:var(--table-foot); font-weight:800;"></tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ONGLET 5 : MON ENTREPRISE & FISCALITÉ TVA -->
+    <!-- ========================================== -->
+    <div id="tab-company" class="tab-content">
+      <div class="table-toolbar">
+        <div>
+          <h2 style="font-size: 1.25rem; font-weight: 800;">🏢 Fiche d'Enregistrement & Régime Fiscal</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Configurez les informations juridiques de votre entreprise et choisissez votre statut au regard de la TVA selon la législation OHADA.
+          </p>
+        </div>
+        <div style="display:flex; gap:0.5rem;">
+          <button type="button" class="btn btn-secondary" onclick="loadCompanyForm()">
+            🔄 Recharger
+          </button>
+        </div>
+      </div>
+
+      <div class="company-settings-card">
+        <form id="company-form" onsubmit="handleSaveCompany(event)">
+          
+          <!-- SECTION 1 : INFORMATIONS DE L'ENTREPRISE -->
+          <div class="form-section-title">
+            <span>📋 Informations Générales de l'Entreprise</span>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="company-name">Nom de l'entreprise / Raison sociale *</label>
+              <input type="text" id="company-name" class="form-control" placeholder="Ex : Boutique Dakar SARL" required />
+            </div>
+
+            <div class="form-group">
+              <label for="company-legal-form">Forme juridique</label>
+              <select id="company-legal-form" class="form-control">
+                <option value="SARL">SARL (Société à Responsabilité Limitée)</option>
+                <option value="SUARL">SUARL (SARL Unipersonnelle)</option>
+                <option value="SAS">SAS (Société par Actions Simplifiée)</option>
+                <option value="Individuelle">Entreprise Individuelle / ETS / Commerçant</option>
+                <option value="GIE">GIE (Groupement d'Intérêt Économique)</option>
+                <option value="Cooperative">Société Coopérative</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="company-country">Pays (Espace OHADA) *</label>
+              <select id="company-country" class="form-control" required>
+                <option value="Sénégal">🇸🇳 Sénégal</option>
+                <option value="Côte d'Ivoire">🇨🇮 Côte d'Ivoire</option>
+                <option value="Cameroun">🇨🇲 Cameroun</option>
+                <option value="Bénin">🇧🇯 Bénin</option>
+                <option value="Togo">🇹🇬 Togo</option>
+                <option value="Mali">🇲🇱 Mali</option>
+                <option value="Burkina Faso">🇧🇫 Burkina Faso</option>
+                <option value="Gabon">🇬🇦 Gabon</option>
+                <option value="Guinée">🇬🇳 Guinée</option>
+                <option value="RDC">🇨🇩 RDC (Congo Kinshasa)</option>
+                <option value="Congo">🇨🇬 Congo (Brazzaville)</option>
+                <option value="Niger">🇳🇪 Niger</option>
+                <option value="Tchad">🇹🇩 Tchad</option>
+                <option value="Centrafrique">🇨🇫 Centrafrique</option>
+                <option value="Guinée Équatoriale">🇬🇶 Guinée Équatoriale</option>
+                <option value="Comores">🇰🇲 Comores</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="company-city">Ville / Adresse physique</label>
+              <input type="text" id="company-city" class="form-control" placeholder="Ex : Marché Sandaga, Dakar" />
+            </div>
+
+            <div class="form-group">
+              <label for="company-ninea">N° Fiscal / NINEA / RCCM / IFU</label>
+              <input type="text" id="company-ninea" class="form-control" placeholder="Ex : SN-DKR-2026-B-12345" />
+            </div>
+
+            <div class="form-group">
+              <label for="company-activity">Secteur d'activité principal</label>
+              <input type="text" id="company-activity" class="form-control" placeholder="Ex : Vente de pagnes, tissus wax et confection" />
+            </div>
+
+            <div class="form-group">
+              <label for="company-currency">Devise comptable</label>
+              <input type="text" id="company-currency" class="form-control" value="FCFA" readonly style="opacity: 0.85;" />
+            </div>
+          </div>
+
+          <!-- SECTION 2 : DIRIGEANT & CONTACT -->
+          <div class="form-section-title" style="margin-top: 1.5rem;">
+            <span>👤 Dirigeant & Coordonnées</span>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="company-owner-name">Nom & Prénom du Dirigeant / Gérant</label>
+              <input type="text" id="company-owner-name" class="form-control" placeholder="Ex : Ibrahima Sow" />
+            </div>
+
+            <div class="form-group">
+              <label for="company-owner-phone">Téléphone / WhatsApp commercial</label>
+              <input type="text" id="company-owner-phone" class="form-control" placeholder="Ex : +221 70 123 45 67" />
+            </div>
+          </div>
+
+          <!-- SECTION 3 : CHOIX DU RÉGIME DE LA TVA -->
+          <div class="form-section-title" style="margin-top: 1.5rem;">
+            <span>🧾 Choix du Régime Fiscal de la TVA</span>
+          </div>
+          <p style="color:var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">
+            Sélectionnez le régime applicable à votre structure selon votre chiffre d'affaires et votre inscription aux impôts :
+          </p>
+
+          <input type="hidden" id="company-regime-tva" value="non-assujetti" />
+
+          <div class="regime-options-grid">
+            <!-- Option 1 : Non-assujetti -->
+            <div class="regime-card selected" id="card-regime-non-assujetti" onclick="selectRegimeTva('non-assujetti')">
+              <div class="regime-card-header">
+                <span class="regime-card-title">🟢 Non-assujetti (Franchise en base)</span>
+                <span class="badge badge-success">Recommandé TPE</span>
+              </div>
+              <p class="regime-card-desc">
+                Régime simplifié pour les petites entreprises, boutiques de quartier et artisans.
+                <strong>Pas de TVA facturée à vos clients</strong>, pas de TVA déductible, vos achats sont comptabilisés TTC.
+                Aucune déclaration périodique de TVA requise.
+              </p>
+            </div>
+
+            <!-- Option 2 : Assujetti -->
+            <div class="regime-card" id="card-regime-assujetti" onclick="selectRegimeTva('assujetti')">
+              <div class="regime-card-header">
+                <span class="regime-card-title">🔵 Assujetti à la TVA (Régime Réel)</span>
+                <span class="badge badge-info">PME & Sociétés</span>
+              </div>
+              <p class="regime-card-desc">
+                Pour les entreprises immatriculées à la TVA.
+                Vous <strong>collectez la TVA sur vos ventes</strong> (comptes 4452/701) et <strong>déduisez la TVA sur vos achats</strong> (compte 4453/601).
+                Calcul automatique du solde de TVA net à reverser au Trésor.
+              </p>
+            </div>
+          </div>
+
+          <!-- Paramètre du taux de TVA (visible si assujetti) -->
+          <div id="tva-rate-container" style="display:none; background:var(--input-bg); border:1px solid var(--border); padding:1.25rem; border-radius:var(--radius-sm); margin-bottom:1.5rem;">
+            <div class="form-grid" style="margin-bottom:0;">
+              <div class="form-group">
+                <label for="company-tva-rate">Taux standard de TVA (%)</label>
+                <input type="number" id="company-tva-rate" class="form-control" value="18" min="0" max="30" step="0.5" />
+                <span style="font-size:0.75rem; color:var(--text-muted);">
+                  Taux normal UEMOA / Sénégal : 18% • Cameroun / CEMAC : 19.25%
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- RÉCAPITULATIF FISCAL TVA EN DIRECT -->
+          <div class="vat-summary-box" id="vat-live-summary">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+              <strong style="font-size:0.9rem;">📊 Déclaration Fiscale Estimée (TVA)</strong>
+              <span id="vat-live-status-badge" class="badge badge-success">Franchise en base</span>
+            </div>
+            <div class="vat-summary-grid">
+              <div>
+                <div style="font-size:0.75rem; color:var(--text-muted);">Chiffre d'Affaires Imposable</div>
+                <div id="vat-live-sales" style="font-size:1.1rem; font-weight:700;">0 FCFA</div>
+              </div>
+              <div>
+                <div style="font-size:0.75rem; color:var(--text-muted);">TVA Facturée / Collectée</div>
+                <div id="vat-live-collected" style="font-size:1.1rem; font-weight:700; color:var(--info);">0 FCFA</div>
+              </div>
+              <div>
+                <div style="font-size:0.75rem; color:var(--text-muted);">TVA Déductible sur Achats</div>
+                <div id="vat-live-deductible" style="font-size:1.1rem; font-weight:700; color:var(--warning);">0 FCFA</div>
+              </div>
+              <div>
+                <div style="font-size:0.75rem; color:var(--text-muted);">Solde Net de TVA</div>
+                <div id="vat-live-net" style="font-size:1.15rem; font-weight:800; color:var(--primary);">0 FCFA</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BOUTONS D'ACTION -->
+          <div style="margin-top: 1.75rem; display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+            <button type="submit" class="btn" id="btn-save-company">
+              <span>💾 Enregistrer les informations</span>
+            </button>
+            <span id="company-save-status" style="font-size:0.85rem; color:var(--text-muted);"></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- CONTENEUR DES TOASTS DE NOTIFICATION -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <footer>
+    <p><strong>NAFA SaaS</strong> • Système Comptable OHADA (SYSCOHADA révisé) • Boutique Dakar SARL • Architecture Déterministe & IA</p>
+  </footer>
+
+  <!-- SCRIPT LOGIQUE ET CLIENT REST -->
+  <script>
+    // ==========================================
+    // GESTION DU MODE JOUR / NUIT (DARK/LIGHT)
+    // ==========================================
+    function initTheme() {
+      const saved = localStorage.getItem('nafa_theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved || (prefersDark ? 'dark' : 'light');
+      applyTheme(theme);
+    }
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('nafa_theme', theme);
+
+      const icon = document.getElementById('theme-icon');
+      const label = document.getElementById('theme-label');
+      if (icon && label) {
+        if (theme === 'dark') {
+          icon.textContent = '☀️';
+          label.textContent = 'Mode Jour';
+        } else {
+          icon.textContent = '🌙';
+          label.textContent = 'Mode Nuit';
+        }
+      }
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    }
+
+    // ==========================================
+    // FORMATAGE ET NAVIGATION
+    // ==========================================
+    function formatFCFA(val) {
+      const num = Number(val) || 0;
+      return new Intl.NumberFormat('fr-FR').format(num) + ' FCFA';
+    }
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+      const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick').includes(tabName));
+      if (targetBtn) targetBtn.classList.add('active');
+
+      const targetContent = document.getElementById(`tab-${tabName}`);
+      if (targetContent) targetContent.classList.add('active');
+
+      if (tabName === 'dashboard') loadDashboard();
+      if (tabName === 'entries') loadEntries();
+      if (tabName === 'reports') loadReports();
+      if (tabName === 'company') loadCompanyForm();
+    }
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      const icon = type === 'success' ? '✅' : '⚠️';
+      toast.innerHTML = `<span>${icon}</span><span>${escapeHtml(message)}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(100%)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    function fillSimulator(text) {
+      const input = document.getElementById('message-input');
+      input.value = text;
+      input.focus();
+    }
+
+    // ==========================================
+    // GESTION DU RÉGIME TVA ET FORMULAIRE ENTREPRISE
+    // ==========================================
+    function selectRegimeTva(regime) {
+      const input = document.getElementById('company-regime-tva');
+      if (input) input.value = regime;
+
+      const cardNon = document.getElementById('card-regime-non-assujetti');
+      const cardAss = document.getElementById('card-regime-assujetti');
+      const rateContainer = document.getElementById('tva-rate-container');
+
+      if (regime === 'assujetti') {
+        if (cardNon) cardNon.classList.remove('selected');
+        if (cardAss) cardAss.classList.add('selected');
+        if (rateContainer) rateContainer.style.display = 'block';
+      } else {
+        if (cardAss) cardAss.classList.remove('selected');
+        if (cardNon) cardNon.classList.add('selected');
+        if (rateContainer) rateContainer.style.display = 'none';
+      }
+    }
+
+    async function loadCompanyForm() {
+      try {
+        const res = await fetch('/api/company');
+        if (res.ok) {
+          const comp = await res.json();
+          document.getElementById('company-name').value = comp.name || '';
+          document.getElementById('company-country').value = comp.country || 'Sénégal';
+          document.getElementById('company-legal-form').value = comp.legal_form || 'SARL';
+          document.getElementById('company-city').value = comp.address || '';
+          document.getElementById('company-ninea').value = comp.ninea || '';
+          document.getElementById('company-activity').value = comp.activity || '';
+          document.getElementById('company-currency').value = comp.currency || 'FCFA';
+          document.getElementById('company-owner-name').value = comp.owner_name || '';
+          document.getElementById('company-owner-phone').value = comp.phone || comp.owner_whatsapp || '';
+          document.getElementById('company-tva-rate').value = comp.tva_rate || 18;
+
+          selectRegimeTva(comp.regime_tva || 'non-assujetti');
+          updateHeaderCompanyUI(comp);
+        }
+
+        // Charger aussi le récapitulatif fiscal de la TVA
+        loadVatReport();
+      } catch (err) {
+        console.error('Erreur chargement formulaire entreprise :', err);
+      }
+    }
+
+    async function loadVatReport() {
+      try {
+        const res = await fetch('/api/reports/vat');
+        if (res.ok) {
+          const vat = await res.json();
+          document.getElementById('vat-live-sales').textContent = formatFCFA(vat.sales_basis);
+          document.getElementById('vat-live-collected').textContent = formatFCFA(vat.vat_collected);
+          document.getElementById('vat-live-deductible').textContent = formatFCFA(vat.vat_deductible);
+          document.getElementById('vat-live-net').textContent = formatFCFA(vat.net_vat);
+
+          const badge = document.getElementById('vat-live-status-badge');
+          if (badge) {
+            badge.textContent = vat.status;
+            badge.className = `badge ${vat.is_assujetti ? (vat.net_vat >= 0 ? 'badge-warning' : 'badge-info') : 'badge-success'}`;
+          }
+        }
+      } catch (e) {
+        console.error('Erreur rapport TVA :', e);
+      }
+    }
+
+    async function handleSaveCompany(event) {
+      event.preventDefault();
+      const statusSpan = document.getElementById('company-save-status');
+      const submitBtn = document.getElementById('btn-save-company');
+
+      const payload = {
+        name: document.getElementById('company-name').value.trim(),
+        country: document.getElementById('company-country').value,
+        legal_form: document.getElementById('company-legal-form').value,
+        address: document.getElementById('company-city').value.trim(),
+        ninea: document.getElementById('company-ninea').value.trim(),
+        activity: document.getElementById('company-activity').value.trim(),
+        currency: 'FCFA',
+        regime_tva: document.getElementById('company-regime-tva').value,
+        tva_rate: parseFloat(document.getElementById('company-tva-rate').value) || 18,
+        owner_name: document.getElementById('company-owner-name').value.trim(),
+        owner_whatsapp: document.getElementById('company-owner-phone').value.trim(),
+        phone: document.getElementById('company-owner-phone').value.trim()
+      };
+
+      try {
+        submitBtn.disabled = true;
+        statusSpan.textContent = 'Enregistrement en cours...';
+
+        const res = await fetch('/api/company', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        if (res.ok && data.success) {
+          statusSpan.textContent = '✅ Enregistré avec succès !';
+          statusSpan.style.color = 'var(--success)';
+          updateHeaderCompanyUI(data.company);
+          showToast(`L'entreprise "${data.company.name}" a été mise à jour !`);
+          loadVatReport();
+        } else {
+          statusSpan.textContent = `❌ ${data.error || 'Erreur lors de l\'enregistrement'}`;
+          statusSpan.style.color = 'var(--danger)';
+        }
+      } catch (err) {
+        statusSpan.textContent = `❌ Erreur : ${err.message}`;
+        statusSpan.style.color = 'var(--danger)';
+      } finally {
+        submitBtn.disabled = false;
+        setTimeout(() => { if (statusSpan) statusSpan.textContent = ''; }, 4000);
+      }
+    }
+
+    function updateHeaderCompanyUI(comp) {
+      if (!comp) return;
+      const subtitle = document.getElementById('header-company-subtitle');
+      if (subtitle) {
+        subtitle.textContent = `Comptabilité SYSCOHADA Révisé • ${comp.name}`;
+      }
+
+      const countryFlag = comp.country === 'Côte d\'Ivoire' ? '🇨🇮' : (comp.country === 'Cameroun' ? '🇨🇲' : '🇸🇳');
+      const countryElem = document.getElementById('header-company-country');
+      if (countryElem) countryElem.textContent = `${countryFlag} ${comp.country}`;
+
+      const currencyElem = document.getElementById('header-company-currency');
+      if (currencyElem) currencyElem.textContent = comp.currency || 'FCFA';
+
+      const tvaBadge = document.getElementById('header-tva-badge');
+      if (tvaBadge) {
+        if (comp.regime_tva === 'assujetti') {
+          tvaBadge.textContent = `Assujetti TVA (${comp.tva_rate || 18}%)`;
+          tvaBadge.className = 'badge badge-info';
+        } else {
+          tvaBadge.textContent = 'Non-assujetti TVA';
+          tvaBadge.className = 'badge badge-success';
+        }
+      }
+
+      // Bannière dashboard
+      const bannerName = document.getElementById('banner-company-name');
+      if (bannerName) bannerName.textContent = comp.name;
+
+      const bannerTva = document.getElementById('banner-tva-badge');
+      if (bannerTva) {
+        if (comp.regime_tva === 'assujetti') {
+          bannerTva.textContent = `Régime : Assujetti TVA (${comp.tva_rate || 18}%)`;
+          bannerTva.className = 'badge badge-info';
+        } else {
+          bannerTva.textContent = 'Régime : Non-assujetti (Franchise)';
+          bannerTva.className = 'badge badge-success';
+        }
+      }
+
+      const bannerDetails = document.getElementById('banner-company-details');
+      if (bannerDetails) {
+        bannerDetails.textContent = `${countryFlag} ${comp.country} • Forme : ${comp.legal_form || 'SARL'} • Gérant : ${comp.owner_name || 'Ibrahima Sow'} • ${comp.ninea ? 'NINEA : ' + comp.ninea : 'SYSCOHADA'}`;
+      }
+    }
+
+    // ==========================================
+    // CHARGEMENT DU TABLEAU DE BORD (DASHBOARD)
+    // ==========================================
+    async function loadDashboard() {
+      try {
+        // Récupérer les statistiques complètes via /api/dashboard/stats
+        const resStats = await fetch('/api/dashboard/stats');
+        if (resStats.ok) {
+          const stats = await resStats.json();
+
+          // Mise à jour de l'UI entreprise
+          if (stats.company) {
+            updateHeaderCompanyUI(stats.company);
+          }
+
+          // Métriques de Trésorerie
+          document.getElementById('kpi-caisse').textContent = formatFCFA(stats.caisse);
+          document.getElementById('kpi-banque').textContent = formatFCFA(stats.banque);
+
+          // Métriques de Performance
+          document.getElementById('kpi-revenus').textContent = formatFCFA(stats.revenus);
+          document.getElementById('kpi-charges').textContent = formatFCFA(stats.charges);
+
+          // Résultat Net
+          const net = stats.resultat;
+          const netElem = document.getElementById('kpi-resultat');
+          const netSub = document.getElementById('kpi-resultat-sub');
+          netElem.textContent = formatFCFA(net);
+
+          if (net > 0) {
+            netElem.style.color = 'var(--success)';
+            netSub.innerHTML = '🟢 Bénéfice net d\'exploitation';
+          } else if (net < 0) {
+            netElem.style.color = 'var(--danger)';
+            netSub.innerHTML = '🔴 Perte nette d\'exploitation';
+          } else {
+            netElem.style.color = 'var(--text)';
+            netSub.innerHTML = '⚪ Équilibre parfait';
+          }
+
+          // Immobilisations & Patrimoine (Classe 2)
+          const immoElem = document.getElementById('kpi-immo');
+          if (immoElem) immoElem.textContent = formatFCFA(stats.immobilisations);
+
+          // Créances & Dettes
+          const clientsElem = document.getElementById('kpi-clients');
+          if (clientsElem) clientsElem.textContent = formatFCFA(stats.creances_clients);
+
+          const dettesSub = document.getElementById('kpi-dettes-sub');
+          if (dettesSub) {
+            dettesSub.textContent = `Dettes fournisseurs (401) : ${formatFCFA(stats.dettes_fournisseurs)}`;
+          }
+
+          // Carte Régime TVA
+          const tvaStatusElem = document.getElementById('kpi-tva-status');
+          const tvaSubElem = document.getElementById('kpi-tva-sub');
+          if (tvaStatusElem && stats.company) {
+            if (stats.company.regime_tva === 'assujetti') {
+              tvaStatusElem.textContent = `Assujetti (${stats.company.tva_rate || 18}%)`;
+              tvaStatusElem.style.color = 'var(--accent)';
+              tvaSubElem.textContent = 'TVA collectée sur ventes & déductible';
+            } else {
+              tvaStatusElem.textContent = 'Franchise (0%)';
+              tvaStatusElem.style.color = 'var(--success)';
+              tvaSubElem.textContent = 'Exonéré de déclaration de TVA';
+            }
+          }
+
+          // Jauge visuelle de rentabilité
+          const totalFlow = stats.revenus + stats.charges;
+          const revPercent = totalFlow > 0 ? Math.round((stats.revenus / totalFlow) * 100) : 50;
+          const expPercent = totalFlow > 0 ? Math.round((stats.charges / totalFlow) * 100) : 50;
+
+          const barRev = document.getElementById('ratio-bar-revenues');
+          const barExp = document.getElementById('ratio-bar-expenses');
+          if (barRev) barRev.style.width = `${revPercent}%`;
+          if (barExp) barExp.style.width = `${expPercent}%`;
+
+          const lblRev = document.getElementById('ratio-revenues-label');
+          const lblExp = document.getElementById('ratio-expenses-label');
+          if (lblRev) lblRev.textContent = `Produits (${revPercent}%)`;
+          if (lblExp) lblExp.textContent = `Charges (${expPercent}%)`;
+
+          const badgeMargin = document.getElementById('ratio-margin-badge');
+          if (badgeMargin) {
+            const margin = stats.revenus > 0 ? Math.round((stats.resultat / stats.revenus) * 100) : 0;
+            badgeMargin.textContent = `Marge Nette : ${margin}%`;
+            badgeMargin.className = `badge ${margin >= 0 ? 'badge-success' : 'badge-danger'}`;
+          }
+        }
+
+        // Écritures récentes
+        const resEntries = await fetch('/api/entries?limit=5');
+        if (resEntries.ok) {
+          const data = await resEntries.json();
+          renderRecentEntries(data.entries);
+        }
+      } catch (err) {
+        console.error('Erreur chargement dashboard :', err);
+      }
+    }
+
+    function renderRecentEntries(entries) {
+      const tbody = document.getElementById('recent-entries-tbody');
+      if (!entries || entries.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:var(--text-muted); padding:2rem;">Aucune écriture enregistrée.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = entries.map(e => `
+        <tr>
+          <td><span style="font-weight:700;">${e.entry_date}</span></td>
+          <td><strong>${escapeHtml(e.description)}</strong></td>
+          <td><span class="badge ${getTypeBadgeClass(e.type)}">${e.type.toUpperCase()}</span></td>
+          <td class="num-col">${formatFCFA(e.montant)}</td>
+          <td><code>${e.compte_debit}</code> <span style="font-size:0.8rem; color:var(--text-muted);">${escapeHtml(e.compte_debit_label)}</span></td>
+          <td><code>${e.compte_credit}</code> <span style="font-size:0.8rem; color:var(--text-muted);">${escapeHtml(e.compte_credit_label)}</span></td>
+          <td><span class="badge badge-info">${Math.round(e.confidence * 100)}%</span></td>
+        </tr>
+      `).join('');
+    }
+
+    function getTypeBadgeClass(type) {
+      const t = String(type || '').toLowerCase();
+      if (t === 'vente' || t === 'produit' || t === 'reglement_client') return 'badge-success';
+      if (t === 'achat') return 'badge-warning';
+      if (t === 'charge') return 'badge-danger';
+      if (t === 'immobilisation') return 'badge-primary';
+      if (t === 'tresorerie') return 'badge-info';
+      if (t === 'capital' || t === 'emprunt') return 'badge-primary';
+      return 'badge-info';
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // ==========================================
+    // ENVOI D'UN MESSAGE AU SIMULATEUR
+    // ==========================================
+    async function handleSendMessage(event) {
+      if (event) event.preventDefault();
+      const input = document.getElementById('message-input');
+      const submitBtn = document.getElementById('btn-submit');
+      const resultBox = document.getElementById('result-box');
+      const text = input.value.trim();
+
+      if (!text) return;
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>Traitement...</span>';
+      resultBox.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text })
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          resultBox.className = 'result-box success';
+          const isRules = data.source === 'deterministic-rules';
+
+          resultBox.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+              <strong style="color:var(--success); font-size:1.05rem;">✅ Écriture validée et inscrite en partie double</strong>
+              <span class="badge ${isRules ? 'badge-success' : 'badge-info'}">
+                ${isRules ? '⚡ Règles Déterministes' : '🤖 Repli IA Validé'}
+              </span>
+            </div>
+
+            <!-- DIAGRAMME VISUEL DU FLUX PARTIE DOUBLE -->
+            <div class="double-entry-flow">
+              <div class="flow-node">
+                <span class="flow-tag" style="color:var(--primary);">Compte Débité (Emploi)</span>
+                <span class="flow-account"><code>${data.compte_debit}</code></span>
+              </div>
+              <div class="flow-arrow-container">
+                <span class="flow-amount-pill">${formatFCFA(data.montant)}</span>
+                <div class="flow-arrow-line"></div>
+              </div>
+              <div class="flow-node" style="text-align:right;">
+                <span class="flow-tag" style="color:var(--accent);">Compte Crédité (Ressource)</span>
+                <span class="flow-account"><code>${data.compte_credit}</code></span>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:1rem; margin-top:0.75rem;">
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Type d'opération</span>
+                <div style="font-weight:700;">${data.type.toUpperCase()}</div>
+              </div>
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Libellé comptable</span>
+                <div style="font-weight:700;">${escapeHtml(data.libelle)}</div>
+              </div>
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Confiance du moteur</span>
+                <div class="confidence-meter">
+                  <div class="confidence-bar">
+                    <div class="confidence-fill" style="width: ${Math.round(data.confiance * 100)}%;"></div>
+                  </div>
+                  <span style="font-weight:700; font-size:0.85rem;">${Math.round(data.confiance * 100)}%</span>
+                </div>
+              </div>
+            </div>
+          `;
+          input.value = '';
+          loadDashboard();
+        } else {
+          resultBox.className = 'result-box error';
+          resultBox.innerHTML = `
+            <div style="color:var(--danger); font-weight:800; font-size:1rem;">❌ ${escapeHtml(data.error || 'Erreur lors du traitement')}</div>
+            <div style="font-size:0.85rem; color:var(--text); margin-top:0.35rem;">
+              ${data.suggestion ? `💡 Suggestion : <em>${escapeHtml(data.suggestion)}</em>` : 'Vérifiez la présence du montant et des mots-clés.'}
+            </div>
+          `;
+        }
+      } catch (err) {
+        resultBox.className = 'result-box error';
+        resultBox.innerHTML = `<div style="color:var(--danger); font-weight:700;">Erreur réseau : ${escapeHtml(err.message)}</div>`;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Enregistrer l\'écriture</span><span>➔</span>';
+        resultBox.style.display = 'block';
+      }
+    }
+
+    // ==========================================
+    // TOUTES LES ÉCRITURES (JOURNAL)
+    // ==========================================
+    let cachedEntries = [];
+
+    async function loadEntries() {
+      try {
+        const res = await fetch('/api/entries?limit=100');
+        if (!res.ok) return;
+        const data = await res.json();
+        cachedEntries = data.entries || [];
+
+        document.getElementById('entries-count-text').textContent = 
+          `${data.total_count} écriture(s) enregistrée(s) • Total Débit: ${formatFCFA(data.totals.total_debit)} • Total Crédit: ${formatFCFA(data.totals.total_credit)}`;
+
+        renderEntriesTable(cachedEntries);
+      } catch (err) {
+        console.error('Erreur chargement écritures :', err);
+      }
+    }
+
+    function renderEntriesTable(entries) {
+      const tbody = document.getElementById('all-entries-tbody');
+      if (!entries || entries.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:var(--text-muted); padding:2.5rem;">Aucune écriture trouvée.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = entries.map(e => `
+        <tr>
+          <td>
+            <div style="font-weight:700;">${e.entry_date}</div>
+            <div style="font-size:0.75rem; color:var(--text-muted); font-family:monospace;">${e.id}</div>
+          </td>
+          <td><strong>${escapeHtml(e.description)}</strong></td>
+          <td><span class="badge ${getTypeBadgeClass(e.type)}">${e.type.toUpperCase()}</span></td>
+          <td class="num-col">${formatFCFA(e.montant)}</td>
+          <td>
+            <code>${e.compte_debit}</code>
+            <div style="font-size:0.75rem; color:var(--text-muted);">${escapeHtml(e.compte_debit_label)}</div>
+          </td>
+          <td>
+            <code>${e.compte_credit}</code>
+            <div style="font-size:0.75rem; color:var(--text-muted);">${escapeHtml(e.compte_credit_label)}</div>
+          </td>
+          <td><span class="badge badge-info">${Math.round(e.confidence * 100)}%</span></td>
+          <td><span style="font-size:0.8rem; color:var(--text-muted);">${e.source}</span></td>
+        </tr>
+      `).join('');
+    }
+
+    function filterEntriesTable() {
+      const q = document.getElementById('search-entries-input').value.toLowerCase().trim();
+      if (!q) {
+        renderEntriesTable(cachedEntries);
+        return;
+      }
+      const filtered = cachedEntries.filter(e => 
+        e.description.toLowerCase().includes(q) ||
+        e.compte_debit.toLowerCase().includes(q) ||
+        (e.compte_debit_label && e.compte_debit_label.toLowerCase().includes(q)) ||
+        e.compte_credit.toLowerCase().includes(q) ||
+        (e.compte_credit_label && e.compte_credit_label.toLowerCase().includes(q)) ||
+        e.type.toLowerCase().includes(q) ||
+        String(e.montant).includes(q)
+      );
+      renderEntriesTable(filtered);
+    }
+
+    // ==========================================
+    // RAPPORTS FINANCIERS (BALANCE & RÉSULTAT)
+    // ==========================================
+    async function loadReports() {
+      try {
+        const [resBal, resInc] = await Promise.all([
+          fetch('/api/reports/trial-balance'),
+          fetch('/api/reports/income-statement')
+        ]);
+
+        if (resBal.ok) {
+          const bal = await resBal.json();
+          renderTrialBalance(bal);
+        }
+
+        if (resInc.ok) {
+          const inc = await resInc.json();
+          renderIncomeStatement(inc);
+        }
+      } catch (err) {
+        console.error('Erreur chargement rapports :', err);
+      }
+    }
+
+    function renderTrialBalance(data) {
+      const banner = document.getElementById('balance-status-banner');
+      if (data.balanced) {
+        banner.className = 'balance-banner balanced';
+        banner.innerHTML = `
+          <span>✅ Statut : Balance Générale Équilibrée</span>
+          <span>Débits (${formatFCFA(data.totals.total_debit)}) = Crédits (${formatFCFA(data.totals.total_credit)})</span>
+        `;
+      } else {
+        banner.className = 'balance-banner unbalanced';
+        banner.innerHTML = `
+          <span>⚠️ Attention : Déséquilibre Détecté</span>
+          <span>Débit: ${formatFCFA(data.totals.total_debit)} | Crédit: ${formatFCFA(data.totals.total_credit)}</span>
+        `;
+      }
+
+      const tbody = document.getElementById('trial-balance-tbody');
+      tbody.innerHTML = data.accounts.map(a => `
+        <tr>
+          <td><code>${a.account_code}</code></td>
+          <td style="font-weight:700;">${escapeHtml(a.account_label)}</td>
+          <td><span class="badge badge-info">Cl. ${a.class}</span></td>
+          <td class="num-col">${a.total_debit > 0 ? formatFCFA(a.total_debit) : '-'}</td>
+          <td class="num-col">${a.total_credit > 0 ? formatFCFA(a.total_credit) : '-'}</td>
+          <td class="num-col" style="color:var(--primary);">${a.debit_balance > 0 ? formatFCFA(a.debit_balance) : '-'}</td>
+          <td class="num-col" style="color:var(--accent);">${a.credit_balance > 0 ? formatFCFA(a.credit_balance) : '-'}</td>
+        </tr>
+      `).join('');
+
+      const tfoot = document.getElementById('trial-balance-tfoot');
+      tfoot.innerHTML = `
+        <tr>
+          <td colspan="3">TOTAUX GÉNÉRAUX</td>
+          <td class="num-col">${formatFCFA(data.totals.total_debit)}</td>
+          <td class="num-col">${formatFCFA(data.totals.total_credit)}</td>
+          <td class="num-col" style="color:var(--primary);">${formatFCFA(data.totals.total_debit_balance)}</td>
+          <td class="num-col" style="color:var(--accent);">${formatFCFA(data.totals.total_credit_balance)}</td>
+        </tr>
+      `;
+    }
+
+    function renderIncomeStatement(data) {
+      // Hero stats
+      document.getElementById('hero-revenues').textContent = formatFCFA(data.revenues.total);
+      document.getElementById('hero-expenses').textContent = formatFCFA(data.expenses.total);
+
+      const net = data.net_profit;
+      const heroNet = document.getElementById('hero-net-profit');
+      const heroMargin = document.getElementById('hero-net-margin');
+
+      heroNet.textContent = `${net >= 0 ? '+' : ''}${formatFCFA(net)}`;
+      if (net > 0) {
+        heroNet.style.color = 'var(--success)';
+        const margin = data.revenues.total > 0 ? Math.round((net / data.revenues.total) * 100) : 0;
+        heroMargin.innerHTML = `🟢 Bénéfice d'exploitation (${margin}% marge)`;
+      } else if (net < 0) {
+        heroNet.style.color = 'var(--danger)';
+        heroMargin.innerHTML = `🔴 Perte d'exploitation`;
+      } else {
+        heroNet.style.color = 'var(--text)';
+        heroMargin.innerHTML = `⚪ Équilibre`;
+      }
+
+      // Tables Produits
+      const revTbody = document.getElementById('income-revenues-tbody');
+      revTbody.innerHTML = data.revenues.accounts.map(a => `
+        <tr>
+          <td><code>${a.account_code}</code> ${escapeHtml(a.account_label)}</td>
+          <td class="num-col" style="color:var(--success);">+ ${formatFCFA(a.amount)}</td>
+        </tr>
+      `).join('');
+
+      const revTfoot = document.getElementById('income-revenues-tfoot');
+      revTfoot.innerHTML = `
+        <tr>
+          <td>TOTAL PRODUITS</td>
+          <td class="num-col" style="color:var(--success);">${formatFCFA(data.revenues.total)}</td>
+        </tr>
+      `;
+
+      // Tables Charges
+      const expTbody = document.getElementById('income-expenses-tbody');
+      expTbody.innerHTML = data.expenses.accounts.map(a => `
+        <tr>
+          <td><code>${a.account_code}</code> ${escapeHtml(a.account_label)}</td>
+          <td class="num-col" style="color:var(--danger);">- ${formatFCFA(a.amount)}</td>
+        </tr>
+      `).join('');
+
+      const expTfoot = document.getElementById('income-expenses-tfoot');
+      expTfoot.innerHTML = `
+        <tr>
+          <td>TOTAL CHARGES</td>
+          <td class="num-col" style="color:var(--danger);">${formatFCFA(data.expenses.total)}</td>
+        </tr>
+        <tr style="background:var(--table-foot); font-size:1.05rem;">
+          <td>RÉSULTAT NET</td>
+          <td class="num-col" style="color:${data.net_profit >= 0 ? 'var(--success)' : 'var(--danger)'};">
+            ${data.net_profit >= 0 ? '+' : ''}${formatFCFA(data.net_profit)}
+          </td>
+        </tr>
+      `;
+    }
+
+    // ==========================================
+    // JEUX DE TEST MESSAGES TYPES ÉTENDUS
+    // ==========================================
+    const TEST_MESSAGES = [
+      // 1. Ventes et Prestations
+      { text: "Vendu pagnes 45000 cash", type: "Vente Marchandises", expected: "Débit 571 / Crédit 701" },
+      { text: "J'ai vendu pour 45 000 FCFA de pagnes ce matin, paye cash", type: "Vente Marchandises", expected: "Débit 571 / Crédit 701" },
+      { text: "Reçu paiement client Mohamed 30000 virement", type: "Vente Marchandises", expected: "Débit 521 / Crédit 701" },
+      { text: "Encaisse prestations couture 25000", type: "Vente Prestations", expected: "Débit 571 / Crédit 706" },
+      { text: "Recu loyer sous location 50000", type: "Produit Accessoire", expected: "Débit 571 / Crédit 754" },
+      
+      // 2. Achats et Stocks
+      { text: "Acheté riz et huile au marché 80000", type: "Achat Marchandises", expected: "Débit 601 / Crédit 571" },
+      { text: "Acheté stock assortiment 120000 crédit fournisseur", type: "Achat Fournisseur", expected: "Débit 601 / Crédit 401" },
+      { text: "Acheté fournitures papier et stylos 8000", type: "Fournitures Bureau", expected: "Débit 604 / Crédit 571" },
+      { text: "Paye fournisseur Adama 50000", type: "Règlement Fournisseur", expected: "Débit 401 / Crédit 571" },
+
+      // 3. Immobilisations (Classe 2)
+      { text: "Achat ordinateur portable 250000 cash", type: "Immobilisation Info", expected: "Débit 244 / Crédit 571" },
+      { text: "Achat machine a coudre 150000", type: "Immobilisation Outillage", expected: "Débit 241 / Crédit 571" },
+      { text: "Achat moto livraison 650000 virement", type: "Immobilisation Transport", expected: "Débit 245 / Crédit 521" },
+
+      // 4. Trésorerie & Virements Internes
+      { text: "Retrait banque pour alimenter caisse 100000", type: "Trésorerie Interne", expected: "Débit 571 / Crédit 521" },
+      { text: "Depot especes a la banque 200000", type: "Trésorerie Interne", expected: "Débit 521 / Crédit 571" },
+      { text: "Transfert caisse vers wave 50000", type: "Trésorerie Mobile Money", expected: "Débit 521 / Crédit 571" },
+
+      // 5. Charges d'Exploitation & Frais Financiers
+      { text: "Frais de retrait wave 1500", type: "Frais Wave / Mobile Money", expected: "Débit 631 / Crédit 521" },
+      { text: "Frais bancaires 2500 virement", type: "Frais Bancaires", expected: "Débit 631 / Crédit 521" },
+      { text: "Honoraires comptable 50000", type: "Honoraires Conseil", expected: "Débit 622 / Crédit 571" },
+      { text: "Frais avocat 75000 virement", type: "Honoraires Avocat", expected: "Débit 622 / Crédit 521" },
+      { text: "Assurance boutique 60000", type: "Primes Assurances", expected: "Débit 625 / Crédit 571" },
+      { text: "Publicite facebook 15000", type: "Marketing & Pub", expected: "Débit 627 / Crédit 571" },
+      { text: "Gardiennage boutique 30000", type: "Sécurité & Nettoyage", expected: "Débit 628 / Crédit 571" },
+      { text: "Patente annuelle 60000", type: "Impôts & Patente", expected: "Débit 646 / Crédit 571" },
+      { text: "Interets pret bancaire 15000", type: "Intérêts Emprunt", expected: "Débit 671 / Crédit 521" },
+      { text: "Loyer boutique 75000", type: "Charge Loyer", expected: "Débit 613 / Crédit 571" },
+      { text: "Salaire employé Ibrahima 100000", type: "Charge Salaire", expected: "Débit 641 / Crédit 571" },
+      { text: "Carburant moto ce matin 10000", type: "Charge Carburant", expected: "Débit 6051 / Crédit 571" },
+      { text: "Facture électricité Senelec 25000", type: "Charge Électricité", expected: "Débit 6053 / Crédit 571" },
+      { text: "Recharge téléphone 5000", type: "Charge Télécom", expected: "Débit 626 / Crédit 571" },
+      { text: "Frais transport marchandises 12000", type: "Charge Transport", expected: "Débit 624 / Crédit 571" },
+      { text: "Paye électricien réparation 15000", type: "Charge Entretien", expected: "Débit 615 / Crédit 571" },
+      { text: "Facture électricité du mois : 25 000 FCFA par virement", type: "Charge Électricité", expected: "Débit 6053 / Crédit 521" },
+
+      // 6. Financements & Capitaux
+      { text: "Apport de capital 500000 cash", type: "Capital Social", expected: "Débit 571 / Crédit 101" },
+      { text: "Retrait personnel exploitant 40000", type: "Compte Exploitant", expected: "Débit 104 / Crédit 571" },
+      { text: "Obtenu pret bancaire 2000000", type: "Emprunt Reçu", expected: "Débit 521 / Crédit 162" },
+      { text: "Remboursement pret bancaire 150000", type: "Remboursement Emprunt", expected: "Débit 162 / Crédit 521" },
+
+      // 7. Tiers & Créances
+      { text: "Avance sur salaire employe 25000", type: "Avance Personnel", expected: "Débit 422 / Crédit 571" },
+      { text: "Client Amadou a paye sa dette 40000", type: "Recouvrement Créance", expected: "Débit 571 / Crédit 411" },
+
+      // 8. Test Non Reconnu
+      { text: "bonjour comment ça va", type: "Test Non Reconnu (422)", expected: "Rejet attendu" }
+    ];
+
+    function renderTestMessages(messages = TEST_MESSAGES) {
+      const container = document.getElementById('test-messages-container');
+      if (!messages || messages.length === 0) {
+        container.innerHTML = '<div style="color:var(--text-muted); padding:2rem;">Aucun message trouvé pour ce filtre.</div>';
+        return;
+      }
+      container.innerHTML = messages.map(m => `
+        <div class="msg-btn" onclick="sendQuickMessage('${m.text.replace(/'/g, "\\'")}')">
+          <div class="msg-btn-text">« ${escapeHtml(m.text)} »</div>
+          <div class="msg-btn-meta">
+            <span class="badge ${m.type.includes('Non Reconnu') ? 'badge-danger' : 'badge-info'}">${escapeHtml(m.type)}</span>
+            <span><code>${escapeHtml(m.expected)}</code></span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterTestMessages() {
+      const q = document.getElementById('filter-messages-input').value.toLowerCase().trim();
+      if (!q) {
+        renderTestMessages(TEST_MESSAGES);
+        return;
+      }
+      const filtered = TEST_MESSAGES.filter(m => 
+        m.text.toLowerCase().includes(q) || 
+        m.type.toLowerCase().includes(q) || 
+        m.expected.toLowerCase().includes(q)
+      );
+      renderTestMessages(filtered);
+    }
+
+    function sendQuickMessage(text) {
+      switchTab('dashboard');
+      const input = document.getElementById('message-input');
+      input.value = text;
+      handleSendMessage();
+    }
+
+    // ==========================================
+    // AUTO-REFRESH TOUTES LES 30 SECONDES
+    // ==========================================
+    setInterval(() => {
+      const activeTab = document.querySelector('.tab-content.active');
+      if (activeTab && activeTab.id === 'tab-dashboard') {
+        loadDashboard();
+      }
+    }, 30000);
+
+    // Initialisation
+    window.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      renderTestMessages();
+      loadDashboard();
+      loadCompanyForm();
+    });
+  </script>
+</body>
+</html>
