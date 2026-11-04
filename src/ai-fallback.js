@@ -7,6 +7,7 @@ dotenv.config();
 
 /**
  * Liste blanche stricte des comptes SYSCOHADA autorisés (synchronisée avec le plan comptable officiel)
+ * Test update
  */
 export const ALLOWED_SYSCOHADA_ACCOUNTS = new Set(
   SYSCOHADA_ACCOUNTS.map(a => a.code)
